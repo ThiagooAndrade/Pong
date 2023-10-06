@@ -2,6 +2,9 @@ import pygame as pg
 from sys import exit
 from random import randint
 
+#Pong
+#Thiago Miguel de Luna Andrade
+#2023
 
 pg.init()
 
@@ -26,7 +29,7 @@ class Player:
     def __init__(self, x, y, width, height):
         self.rect = pg.Rect(
             x, y, width, height
-        )  # classe Rect para usar o colliderect para a colisão
+        ) 
 
         self.width = width  # largura do jogador(retangulo)
         self.height = height  # altura do jogador(retangulo)
@@ -35,7 +38,7 @@ class Player:
         self.vel = 10  # velocidade do jogador (retangulo)  só consegue se mover para cima ou para baixo
 
     def render(self, screen):
-        pg.draw.rect(screen, "white", self.rect)  # desenha os jogadores(retangulos)
+        pg.draw.rect(screen, "white", self.rect,0, 7)  # desenha os jogadores(retangulos)
 
     def move_up(self):
         self.rect.y -= self.vel  # move os jogadores(retangulos) para cima
@@ -43,18 +46,13 @@ class Player:
     def move_down(self):
         self.rect.y += self.vel  # move os jogares(retangulos) para baixo
 
-    def move_right(self):
-        self.rect.x += self.vel
-
-    def move_left(self):
-        self.rect.x -= self.vel
 
 
 class Ball:
     def __init__(self, x, y, radius):
         self.rect = pg.Rect(
             x - radius, y - radius, radius * 2, radius * 2
-        )  # classe Rect para usar o colliderect para a colisão
+        )
 
         self.radius = radius  # raio do a bola
         self.x = x  # posição x da bola
@@ -65,7 +63,6 @@ class Ball:
 
     def render(self, screen):
         pg.draw.circle(screen, "white", (self.x, self.y), self.radius)  # desenha a bola
-        pg.draw.circle(screen, "red", (self.x - self.radius, self.y - self.radius), 5)
 
     def update(self):
         if self.rand == 1:
@@ -148,14 +145,6 @@ while game:
             if keys[pg.K_s]:
                 rect1.move_down()
 
-        if rect1.rect.x < SCREEN_WIDTH / 2 - 100:
-            if keys[pg.K_d]:
-                rect1.move_right()
-
-        if rect1.rect.x > 0:
-            if keys[pg.K_a]:
-                rect1.move_left()
-
         if rect2.rect.y > 0:
             if keys[pg.K_UP]:
                 rect2.move_up()
@@ -163,14 +152,6 @@ while game:
         if rect2.rect.y < SCREEN_HEIGHT - 150:
             if keys[pg.K_DOWN]:
                 rect2.move_down()
-
-        if rect2.rect.x < SCREEN_WIDTH - PLAYER_WIDTH:
-            if keys[pg.K_RIGHT]:
-                rect2.move_right()
-
-        if rect2.rect.x > SCREEN_WIDTH / 2 + 100:
-            if keys[pg.K_LEFT]:
-                rect2.move_left()
 
         rect1.render(screen)
         rect2.render(screen)
