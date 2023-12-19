@@ -1,3 +1,2 @@
 # Pong
-Pong game 
-biblioteca pygame
+Pong game utilizando a biblioteca pygame
